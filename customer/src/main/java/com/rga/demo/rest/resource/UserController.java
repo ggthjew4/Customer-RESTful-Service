@@ -15,7 +15,6 @@ public class UserController {
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public Map list() {
 		return null;
-
 	}
 
 	@RequestMapping(value = "get", method = RequestMethod.GET)

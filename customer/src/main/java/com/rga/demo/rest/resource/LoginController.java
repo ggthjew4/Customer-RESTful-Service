@@ -26,7 +26,7 @@ public class LoginController {
 
 	}
 
-	@ResponseStatus(HttpStatus.NOT_FOUND)
+	
 	public class UserNotFoundException extends RuntimeException {
 
 		private static final long serialVersionUID = -9052367867893519929L;
