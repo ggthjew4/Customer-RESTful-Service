@@ -1,4 +1,4 @@
-package com.rga.demo.common.Exception;
+package com.rga.demo.common.exception;
 
 public class CustomerCertificateExpiredException extends RuntimeException {
 

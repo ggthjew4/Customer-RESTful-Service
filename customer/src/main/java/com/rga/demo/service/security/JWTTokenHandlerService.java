@@ -33,7 +33,7 @@ public class JWTTokenHandlerService implements ITokenHandlerService{
 			.compact();
 	}
 	
-	public RGACustomer parseUserFromToken(final String token) {
+	public RGACustomer parseCustomerFromToken(final String token) {
 		final Key key = MacProvider.generateKey();
 		final Claims body = Jwts.parser()
                 .setSigningKey(key)
@@ -41,7 +41,6 @@ public class JWTTokenHandlerService implements ITokenHandlerService{
                 .getBody();
         final String username = body.getSubject();
         final RGACustomer customer = userService.loadUserByUsername(username);
-        customer.setExpiration(body.getExpiration());
         return customer;
     }
 }

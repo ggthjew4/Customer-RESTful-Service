@@ -6,6 +6,6 @@ public interface ITokenHandlerService {
 	
 	public String createJWTToken(final RGACustomer customer);
 	
-	public RGACustomer parseUserFromToken(final String token);
+	public RGACustomer parseCustomerFromToken(final String token);
 
 }

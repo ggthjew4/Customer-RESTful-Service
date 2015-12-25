@@ -1,14 +1,14 @@
 package com.rga.demo.common;
 
-import java.util.Date;
-
 import com.rga.demo.common.model.RGACustomer;
 
 public class CustomerAuthentication {
 
 	private final RGACustomer customer;
 	
-	private boolean authenticated = true;
+	private String token;
+	
+	private boolean authenticated = false;
 	
 	public CustomerAuthentication(final RGACustomer pCustomer){
 		this.customer = pCustomer;
@@ -25,9 +25,13 @@ public class CustomerAuthentication {
 	public RGACustomer getCustomer() {
 		return customer;
 	}
+	
+	public String getToken() {
+		return token;
+	}
 
-	public boolean isExpired() {
-		return this.getCustomer().getExpiration().before(new Date());
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

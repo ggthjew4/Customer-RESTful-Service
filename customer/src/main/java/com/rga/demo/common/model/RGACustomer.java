@@ -1,18 +1,33 @@
 package com.rga.demo.common.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
-public class RGACustomer implements Serializable{
-	
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Table(name = "RGA_CUSTOMERS")
+@Entity
+public class RGACustomer implements Serializable {
+
 	private static final long serialVersionUID = 6848754731320916890L;
 
+	@Id
+	@GeneratedValue
+	@Column(name = "ID")
+	private Integer id;
+
+	@Column(name = "USERNAME")
 	private String username;
-	
+
+	@Column(name = "PASSWORD")
 	private String password;
-	
-	private Date expiration;
-	
+
+	@Column(name = "EMAIL")
+	private String email;
+
 	public RGACustomer() {
 		super();
 	}
@@ -21,6 +36,14 @@ public class RGACustomer implements Serializable{
 		super();
 		this.username = username;
 		this.password = password;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -39,14 +62,12 @@ public class RGACustomer implements Serializable{
 		this.password = password;
 	}
 
-	public Date getExpiration() {
-		return expiration;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setExpiration(Date expiration) {
-		this.expiration = expiration;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
-	
 
 }
