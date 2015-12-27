@@ -40,15 +40,15 @@ public class CustomerController {
 		return new ResponseEntity<RGACustomer>(customerService.createCustomer(body.getUsername(), body.getPassword(), body.getEmail()), HttpStatus.CREATED);
 	}
 
+	@RequestMapping(value = "update", consumes = MediaType.APPLICATION_JSON, method = RequestMethod.POST)
+	public ResponseEntity<RGACustomer> update(@RequestBody final CreateCustomerRequestBody body) {
+		return new ResponseEntity<RGACustomer>(customerService.update(new RGACustomer(body)), HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> delete(@PathVariable Integer id) {
 		customerService.delete(id);
 		return new ResponseEntity<String>(HttpStatus.OK);
-	}
-
-	@RequestMapping(value = "update", consumes = MediaType.APPLICATION_JSON, method = RequestMethod.POST)
-	public ResponseEntity<RGACustomer> update(@RequestBody final CreateCustomerRequestBody body) {
-		return new ResponseEntity<RGACustomer>(customerService.update(new RGACustomer(body)), HttpStatus.OK);
 	}
 
 }
