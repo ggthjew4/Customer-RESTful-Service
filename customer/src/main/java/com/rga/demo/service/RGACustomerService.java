@@ -4,18 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rga.demo.common.exception.CustomerNotFoundException;
-import com.rga.demo.common.intf.IUserDao;
-import com.rga.demo.common.intf.IUserService;
+import com.rga.demo.common.intf.ICustomerDao;
+import com.rga.demo.common.intf.ICustomerService;
 import com.rga.demo.common.model.RGACustomer;
 
 @Service
-public class RGAUserService implements IUserService {
+public class RGACustomerService implements ICustomerService {
 
 	@Autowired
-	private IUserDao<RGACustomer> customerDao;
+	private ICustomerDao<RGACustomer> customerDao;
 
-	public RGACustomer loadUserByUsername(String username) {
-		final RGACustomer customer = customerDao.findByUsername(username);
+	public RGACustomer loadUserByCustomerName(String username) {
+		final RGACustomer customer = customerDao.findByCustomerName(username);
 		if (null == customer) {
 			throw new CustomerNotFoundException(username);
 		}

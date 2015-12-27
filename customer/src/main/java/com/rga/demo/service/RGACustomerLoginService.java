@@ -7,7 +7,7 @@ import com.rga.demo.common.CustomerAuthentication;
 import com.rga.demo.common.exception.CustomerAuthenticationException;
 import com.rga.demo.common.intf.ITokenAuthenticationService;
 import com.rga.demo.common.intf.IUserLoginService;
-import com.rga.demo.common.intf.IUserService;
+import com.rga.demo.common.intf.ICustomerService;
 import com.rga.demo.common.model.RGACustomer;
 
 @Service
@@ -17,17 +17,17 @@ public class RGACustomerLoginService implements IUserLoginService {
 	private ITokenAuthenticationService tokenAuthenticationService;
 
 	@Autowired
-	private IUserService customerService;
+	private ICustomerService customerService;
 
 	public CustomerAuthentication porcessLogin(final String username,final String password) {
 		validateCustomerCertification(username, password);
-		final CustomerAuthentication authentication = tokenAuthenticationService.getAuthentication(customerService.loadUserByUsername(username));
+		final CustomerAuthentication authentication = tokenAuthenticationService.getAuthentication(customerService.loadUserByCustomerName(username));
 		tokenAuthenticationService.addAuthentication(authentication);
 		return authentication;
 	}
 
 	private void validateCustomerCertification(final String username,final String password) {
-		final RGACustomer customer = customerService.loadUserByUsername(username);
+		final RGACustomer customer = customerService.loadUserByCustomerName(username);
 		if (!customer.getPassword().equals(password)) {
 			throw new CustomerAuthenticationException("Customer password was incorrect!");
 		}

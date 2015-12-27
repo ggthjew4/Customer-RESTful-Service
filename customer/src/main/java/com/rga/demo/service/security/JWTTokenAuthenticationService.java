@@ -8,7 +8,7 @@ import com.rga.demo.common.exception.CustomerNotFoundException;
 import com.rga.demo.common.intf.ITokenAuthenticationService;
 import com.rga.demo.common.intf.ITokenHandlerService;
 import com.rga.demo.common.intf.ITokenStoreService;
-import com.rga.demo.common.intf.IUserService;
+import com.rga.demo.common.intf.ICustomerService;
 import com.rga.demo.common.model.RGACustomer;
 
 @Service
@@ -21,7 +21,7 @@ public class JWTTokenAuthenticationService implements ITokenAuthenticationServic
 	private ITokenStoreService tokenStoreService;
 	
 	@Autowired
-	private IUserService customerService;
+	private ICustomerService customerService;
 	
 
 	public String addAuthentication(final CustomerAuthentication authentication) {

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rga.demo.common.CustomerAuthentication;
 import com.rga.demo.common.intf.ICustomerLogoutService;
 import com.rga.demo.common.intf.IUserLoginService;
-import com.rga.demo.common.intf.IUserService;
+import com.rga.demo.common.intf.ICustomerService;
 import com.rga.demo.vo.LoginRequestBody;
 import com.rga.demo.vo.LoginResponseBody;
 
@@ -25,7 +25,7 @@ public class LoginController {
 
 
 	@Autowired
-	private IUserService customerService;
+	private ICustomerService customerService;
 	
 	@Autowired
 	private IUserLoginService loginService;

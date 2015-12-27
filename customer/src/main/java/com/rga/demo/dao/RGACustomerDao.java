@@ -10,16 +10,16 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import com.rga.demo.common.intf.IUserDao;
+import com.rga.demo.common.intf.ICustomerDao;
 import com.rga.demo.common.model.RGACustomer;
 
 @Repository
-public class RGACustomerDao implements IUserDao<RGACustomer> {
+public class RGACustomerDao implements ICustomerDao<RGACustomer> {
 
     @PersistenceContext
     private EntityManager em;
     
-	public RGACustomer findByUsername(String username) {
+	public RGACustomer findByCustomerName(String username) {
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
 		final CriteriaQuery<RGACustomer> cq = cb.createQuery(RGACustomer.class);
 		final Root<RGACustomer> customer = cq.from(RGACustomer.class);

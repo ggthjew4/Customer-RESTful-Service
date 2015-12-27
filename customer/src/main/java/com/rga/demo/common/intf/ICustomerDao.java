@@ -2,9 +2,9 @@ package com.rga.demo.common.intf;
 
 import java.util.List;
 
-public interface IUserDao<T> {
+public interface ICustomerDao<T> {
 
-	public T findByUsername(final String username);
+	public T findByCustomerName(final String customerName);
 
 	public T findById(final Integer id);
 

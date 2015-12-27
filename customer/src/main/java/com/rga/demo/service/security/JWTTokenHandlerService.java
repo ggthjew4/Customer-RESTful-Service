@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rga.demo.common.intf.ITokenHandlerService;
-import com.rga.demo.common.intf.IUserService;
+import com.rga.demo.common.intf.ICustomerService;
 import com.rga.demo.common.model.RGACustomer;
 
 @Service
 public class JWTTokenHandlerService implements ITokenHandlerService{
 	
 	@Autowired
-	private IUserService userService;
+	private ICustomerService userService;
 	
 	public String createJWTToken(final RGACustomer customer){
         long issuedAt = System.currentTimeMillis() / 1000L;
@@ -40,7 +40,7 @@ public class JWTTokenHandlerService implements ITokenHandlerService{
                 .parseClaimsJws(token)
                 .getBody();
         final String username = body.getSubject();
-        final RGACustomer customer = userService.loadUserByUsername(username);
+        final RGACustomer customer = userService.loadUserByCustomerName(username);
         return customer;
     }
 }
