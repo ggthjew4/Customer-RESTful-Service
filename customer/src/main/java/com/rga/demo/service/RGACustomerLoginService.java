@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import com.rga.demo.common.CustomerAuthentication;
 import com.rga.demo.common.exception.CustomerAuthenticationException;
 import com.rga.demo.common.intf.ITokenAuthenticationService;
-import com.rga.demo.common.intf.IUserLoginService;
+import com.rga.demo.common.intf.ICustomerLoginService;
 import com.rga.demo.common.intf.ICustomerService;
 import com.rga.demo.common.model.RGACustomer;
 
 @Service
-public class RGACustomerLoginService implements IUserLoginService {
+public class RGACustomerLoginService implements ICustomerLoginService {
 
 	@Autowired
 	private ITokenAuthenticationService tokenAuthenticationService;

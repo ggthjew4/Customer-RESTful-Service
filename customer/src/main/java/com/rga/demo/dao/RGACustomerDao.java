@@ -9,11 +9,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rga.demo.common.intf.ICustomerDao;
 import com.rga.demo.common.model.RGACustomer;
 
 @Repository
+@Transactional
 public class RGACustomerDao implements ICustomerDao<RGACustomer> {
 
     @PersistenceContext
@@ -34,6 +36,24 @@ public class RGACustomerDao implements ICustomerDao<RGACustomer> {
 
 	public List<RGACustomer> findAll() {
 		return em.createQuery("SELECT p FROM RGACustomer p",RGACustomer.class).getResultList();
+	}
+	
+	public RGACustomer create(final String customerName,final String password,final String email){
+		final RGACustomer customer = new RGACustomer(customerName, password,email);
+		em.persist(customer);
+		return customer;
+	}
+	
+	public RGACustomer update(final RGACustomer customer){
+		final RGACustomer previousCustomer = findByCustomerName(customer.getUsername());
+		previousCustomer.setUsername(customer.getUsername());
+		previousCustomer.setPassword(customer.getPassword());
+		previousCustomer.setEmail(customer.getEmail());
+		return em.merge(previousCustomer);
+	}
+
+	public void delete(Integer id) {
+		em.remove(findById(id));
 	}
     
 }

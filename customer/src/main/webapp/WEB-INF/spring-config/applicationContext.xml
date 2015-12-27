@@ -21,7 +21,6 @@
 		<jdbc:script location="classpath:db/sql/insert-data.sql" />
    </jdbc:initialize-database>
 
-
 	<bean id="dbcpDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
@@ -52,5 +51,6 @@
 	</bean>
 
 	<mvc:annotation-driven />
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>

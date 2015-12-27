@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rga.demo.common.CustomerAuthentication;
+import com.rga.demo.common.exception.CustomerCertificateExpiredException;
 import com.rga.demo.common.exception.CustomerNotFoundException;
+import com.rga.demo.common.intf.IAuthenticationStoreService;
+import com.rga.demo.common.intf.ICustomerService;
 import com.rga.demo.common.intf.ITokenAuthenticationService;
 import com.rga.demo.common.intf.ITokenHandlerService;
-import com.rga.demo.common.intf.ITokenStoreService;
-import com.rga.demo.common.intf.ICustomerService;
 import com.rga.demo.common.model.RGACustomer;
 
 @Service
@@ -18,7 +19,7 @@ public class JWTTokenAuthenticationService implements ITokenAuthenticationServic
 	private ITokenHandlerService tokenHandlerService;
 	
 	@Autowired
-	private ITokenStoreService tokenStoreService;
+	private IAuthenticationStoreService authenticationStoreService;
 	
 	@Autowired
 	private ICustomerService customerService;
@@ -27,18 +28,20 @@ public class JWTTokenAuthenticationService implements ITokenAuthenticationServic
 	public String addAuthentication(final CustomerAuthentication authentication) {
 		final RGACustomer customer = authentication.getCustomer();
 		final String jwtToken = tokenHandlerService.createJWTToken(customer);
-		tokenStoreService.addToken(customer.getUsername(), jwtToken);
+		authenticationStoreService.addAuthentication(customer.getUsername(), authentication);
 		return jwtToken;
 	}
 
 	public CustomerAuthentication getAuthentication(final String jwtToken) {
         if (jwtToken != null) {
             final RGACustomer customer = tokenHandlerService.parseCustomerFromToken(jwtToken);
-            if (customer != null) {
-                return new CustomerAuthentication(customer);
+            final CustomerAuthentication authentication = authenticationStoreService.getAuthentication(customer.getUsername());
+            if(null == authentication){
+            	throw new CustomerCertificateExpiredException(customer.getUsername());
             }
+            return authenticationStoreService.getAuthentication(customer.getUsername());
         }
-        throw new CustomerNotFoundException("");
+        throw new CustomerNotFoundException("Customer isn't found!");
 	}
 	
 	public CustomerAuthentication getAuthentication(final RGACustomer customer) {

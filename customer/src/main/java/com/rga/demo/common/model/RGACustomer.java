@@ -1,12 +1,19 @@
 package com.rga.demo.common.model;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.apache.commons.beanutils.BeanUtils;
+
+import com.rga.demo.vo.CreateCustomerRequestBody;
 
 @Table(name = "RGA_CUSTOMERS")
 @Entity
@@ -15,8 +22,9 @@ public class RGACustomer implements Serializable {
 	private static final long serialVersionUID = 6848754731320916890L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID")
+	@Basic
 	private Integer id;
 
 	@Column(name = "USERNAME")
@@ -32,10 +40,21 @@ public class RGACustomer implements Serializable {
 		super();
 	}
 
-	public RGACustomer(String username, String password) {
+	public RGACustomer(final String username, final String password,final String email) {
 		super();
 		this.username = username;
 		this.password = password;
+		this.email = email;
+	}
+	
+	public RGACustomer(final CreateCustomerRequestBody body){
+		try {
+			BeanUtils.copyProperties(this, body);
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Integer getId() {

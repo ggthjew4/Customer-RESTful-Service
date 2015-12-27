@@ -8,16 +8,16 @@ public class LoginResponseBody implements Serializable{
 
 	private String token;
 	
-	private String userName;
+	private String customerName;
 	
 	private String message;
 	
 	public LoginResponseBody(){}
 
-	public LoginResponseBody(String token, String userName,String message) {
+	public LoginResponseBody(String token, String customerName,String message) {
 		super();
 		this.token = token;
-		this.userName = userName;
+		this.customerName = customerName;
 		this.message = message;
 	}
 
@@ -30,11 +30,11 @@ public class LoginResponseBody implements Serializable{
 	}
 
 	public String getUserName() {
-		return userName;
+		return customerName;
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.customerName = userName;
 	}
 
 	public String getMessage() {

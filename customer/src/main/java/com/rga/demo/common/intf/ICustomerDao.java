@@ -9,5 +9,11 @@ public interface ICustomerDao<T> {
 	public T findById(final Integer id);
 
 	public List<T> findAll();
+	
+	public T create(final String customerName,final String password,final String email);
+	
+	public T update(final T customer);
+	
+	public void delete(final Integer id);
 
 }
