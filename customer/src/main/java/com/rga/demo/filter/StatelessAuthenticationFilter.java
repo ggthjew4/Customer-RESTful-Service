@@ -39,7 +39,7 @@ public class StatelessAuthenticationFilter implements Filter {
 			throw new CustomerAuthenticationException(customerName);
 		}
         filterChain.doFilter(request, response);
-	}
+	} 
     
     private String getRequestJWTToken(final ServletRequest request){
     	return ((HttpServletRequest)request).getHeader(JWTConstant.JWT_AUTH_HEADER_NAME);
