@@ -32,7 +32,7 @@ public class StatelessAuthenticationFilter implements Filter {
     
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
 		final String jwtToken = getRequestJWTToken(request);
-		validateJwtToken(jwtToken);
+		validateJwtToken(jwtToken); 
 		final CustomerAuthentication authentication = tokenAuthenticationService.getAuthentication(jwtToken);
 		final String customerName = authentication.getCustomer().getUsername();
 		if(!authentication.isAuthenticated()){
