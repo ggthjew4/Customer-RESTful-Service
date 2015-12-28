@@ -35,7 +35,7 @@ public class StatelessAuthenticationFilter implements Filter {
 		validateJwtToken(jwtToken); 
 		final CustomerAuthentication authentication = tokenAuthenticationService.getAuthentication(jwtToken);
 		final String customerName = authentication.getCustomer().getUsername();
-		if(!authentication.isAuthenticated()){
+		if(!authentication.isAuthenticated()){ 
 			throw new CustomerAuthenticationException(customerName);
 		}
         filterChain.doFilter(request, response);
