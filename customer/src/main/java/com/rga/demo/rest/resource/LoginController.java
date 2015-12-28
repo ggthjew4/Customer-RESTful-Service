@@ -30,6 +30,7 @@ public class LoginController {
 	@Autowired
 	private ICustomerLoginService loginService;
 	
+	@Autowired
 	private ICustomerLogoutService logoutService;
 
 	@RequestMapping(value = "login", consumes = MediaType.APPLICATION_JSON, method = RequestMethod.POST)
@@ -38,7 +39,7 @@ public class LoginController {
 		return new ResponseEntity<LoginResponseBody>(new LoginResponseBody(authentication.getToken(),vo.getCustomerName(),"Login Success!"), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "logout", consumes = MediaType.APPLICATION_FORM_URLENCODED,method = RequestMethod.POST)
+	@RequestMapping(value = "logout",method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void logout(@RequestParam("customerName") String customerName) {
 		logoutService.processLogout(customerName);
