@@ -24,7 +24,7 @@ import com.rga.demo.common.intf.ITokenAuthenticationService;
 public class StatelessAuthenticationFilter implements Filter {
 	
 	@Autowired
-	private ITokenAuthenticationService tokenAuthenticationService;
+	private ITokenAuthenticationService tokenAuthenticationService; 
        
 	public void init(FilterConfig filterConfig) throws ServletException {
 		 SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,filterConfig.getServletContext());		
